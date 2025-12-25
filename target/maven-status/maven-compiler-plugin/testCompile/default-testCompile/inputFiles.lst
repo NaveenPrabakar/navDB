@@ -3,5 +3,6 @@ C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\t
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\test\java\cachedb\CacheDBIdempotencyTest.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\test\java\cachedb\CacheDBLifecycleTest.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\test\java\cachedb\CacheDBMultiTableTest.java
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\test\java\cachedb\CacheDBRecoveryTest.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\test\java\cachedb\CacheDBReinsertTest.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\test\java\cachedb\CacheDBTestBase.java

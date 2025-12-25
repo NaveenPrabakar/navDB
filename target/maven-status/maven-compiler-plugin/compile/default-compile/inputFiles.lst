@@ -5,10 +5,16 @@ C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\m
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\ExpirationManager.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\FlushManager.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\FlushTask.java
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\LogRecord.java
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\LogSerializer.java
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\LogType.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\Main.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\RowMutation.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\SchemaRegistry.java
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\SimpleCodec.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\SimpleDataSource.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\SqlBuilder.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\TableMeta.java
 C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\TableSchema.java
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\WALReader.java
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java\cachedb\WALWriter.java
