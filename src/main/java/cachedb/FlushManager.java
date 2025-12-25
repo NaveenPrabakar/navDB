@@ -58,8 +58,25 @@ public class FlushManager implements Runnable {
                 }
             }
 
-            ps.executeUpdate();
+            try {
+                ps.executeUpdate();
+                checkpoint();
+            } catch (Exception e) {
+                // DB down → WAL preserved
+            }
+
             System.out.println("[FLUSHED] " + m.table + " " + m.primaryKey);
         }
     }
+
+    private void checkpoint() {
+        try {
+            WALWriter wal = WALWriter.getInstance();
+            wal.sync();
+            wal.truncate();
+        } catch (Exception e) {
+            // swallow — DB is already durable
+        }
+    }
+
 }

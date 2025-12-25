@@ -28,6 +28,17 @@ public final class CacheDB {
         recover();
     }
 
+    public synchronized void checkpoint() {
+        try {
+            wal.sync();
+            wal.truncate();
+        } catch (Exception e) {
+            // swallow
+        }
+    }
+
+
+
     private void recover() throws IOException {
         if (!Files.exists(WAL_PATH)) return;
 
