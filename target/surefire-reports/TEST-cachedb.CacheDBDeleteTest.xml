@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="cachedb.CacheDBIntegrationTest" time="33.184" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="cachedb.CacheDBDeleteTest" time="3.228" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\nvnpr\AppData\Local\Temp\surefire11079361581903532265\surefirebooter-20251224165105716_3.jar C:\Users\nvnpr\AppData\Local\Temp\surefire11079361581903532265 2025-12-24T16-51-05_131-jvmRun1 surefire-20251224165105716_1tmp surefire_0-20251224165105716_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\nvnpr\AppData\Local\Temp\surefire9252921691540968451\surefirebooter-20251226192303488_3.jar C:\Users\nvnpr\AppData\Local\Temp\surefire9252921691540968451 2025-12-26T19-23-03_244-jvmRun1 surefire-20251226192303488_1tmp surefire_0-20251226192303488_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\test-classes;C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\classes;C:\Users\nvnpr\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\nvnpr\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\nvnpr\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\nvnpr\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\nvnpr\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\nvnpr\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\nvnpr\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\nvnpr\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\nvnpr\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\nvnpr\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\nvnpr\AppData\Local\Temp\surefire11079361581903532265\surefirebooter-20251224165105716_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\nvnpr\AppData\Local\Temp\surefire9252921691540968451\surefirebooter-20251226192303488_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.4+8-LTS-274"/>
@@ -58,138 +58,15 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testMultipleKeysSameTable" classname="cachedb.CacheDBIntegrationTest" time="3.049">
-    <system-out><![CDATA[[FLUSHED] table=users pk=4 data=Dave
-[FLUSHED] table=users pk=5 data=Eve
+  <testcase name="deleteThenReinsert" classname="cachedb.CacheDBDeleteTest" time="0.025"/>
+  <testcase name="basicDelete" classname="cachedb.CacheDBDeleteTest" time="0.023"/>
+  <testcase name="deleteAfterSetRecovery" classname="cachedb.CacheDBDeleteTest" time="0.043"/>
+  <testcase name="deleteWithCompositeKey" classname="cachedb.CacheDBDeleteTest" time="0.027"/>
+  <testcase name="deleteRecoveryFromWAL" classname="cachedb.CacheDBDeleteTest" time="0.029"/>
+  <testcase name="deleteMultipleEntries" classname="cachedb.CacheDBDeleteTest" time="0.022"/>
+  <testcase name="deleteIsFlushedToDatabase" classname="cachedb.CacheDBDeleteTest" time="3.024">
+    <system-out><![CDATA[[FLUSHED DELETE] users {id=2}
 ]]></system-out>
   </testcase>
-  <testcase name="testCacheMissAfterExpiration" classname="cachedb.CacheDBIntegrationTest" time="3.002">
-    <system-out><![CDATA[[FLUSHED] table=users pk=7 data=Grace
-]]></system-out>
-  </testcase>
-  <testcase name="testFlushBacklogStress" classname="cachedb.CacheDBIntegrationTest" time="5.012">
-    <system-out><![CDATA[[FLUSHED] table=users pk=bulk-0 data=value-0
-[FLUSHED] table=users pk=bulk-1 data=value-1
-[FLUSHED] table=users pk=bulk-3 data=value-3
-[FLUSHED] table=users pk=bulk-7 data=value-7
-[FLUSHED] table=users pk=bulk-15 data=value-15
-[FLUSHED] table=users pk=bulk-8 data=value-8
-[FLUSHED] table=users pk=bulk-4 data=value-4
-[FLUSHED] table=users pk=bulk-9 data=value-9
-[FLUSHED] table=users pk=bulk-10 data=value-10
-[FLUSHED] table=users pk=bulk-2 data=value-2
-[FLUSHED] table=users pk=bulk-5 data=value-5
-[FLUSHED] table=users pk=bulk-11 data=value-11
-[FLUSHED] table=users pk=bulk-12 data=value-12
-[FLUSHED] table=users pk=bulk-6 data=value-6
-[FLUSHED] table=users pk=bulk-13 data=value-13
-[FLUSHED] table=users pk=bulk-14 data=value-14
-[FLUSHED] table=users pk=bulk-84 data=value-84
-[FLUSHED] table=users pk=bulk-83 data=value-83
-[FLUSHED] table=users pk=bulk-82 data=value-82
-[FLUSHED] table=users pk=bulk-81 data=value-81
-[FLUSHED] table=users pk=bulk-80 data=value-80
-[FLUSHED] table=users pk=bulk-79 data=value-79
-[FLUSHED] table=users pk=bulk-78 data=value-78
-[FLUSHED] table=users pk=bulk-77 data=value-77
-[FLUSHED] table=users pk=bulk-76 data=value-76
-[FLUSHED] table=users pk=bulk-75 data=value-75
-[FLUSHED] table=users pk=bulk-74 data=value-74
-[FLUSHED] table=users pk=bulk-73 data=value-73
-[FLUSHED] table=users pk=bulk-72 data=value-72
-[FLUSHED] table=users pk=bulk-71 data=value-71
-[FLUSHED] table=users pk=bulk-70 data=value-70
-[FLUSHED] table=users pk=bulk-69 data=value-69
-[FLUSHED] table=users pk=bulk-68 data=value-68
-[FLUSHED] table=users pk=bulk-67 data=value-67
-[FLUSHED] table=users pk=bulk-66 data=value-66
-[FLUSHED] table=users pk=bulk-65 data=value-65
-[FLUSHED] table=users pk=bulk-64 data=value-64
-[FLUSHED] table=users pk=bulk-63 data=value-63
-[FLUSHED] table=users pk=bulk-62 data=value-62
-[FLUSHED] table=users pk=bulk-61 data=value-61
-[FLUSHED] table=users pk=bulk-60 data=value-60
-[FLUSHED] table=users pk=bulk-59 data=value-59
-[FLUSHED] table=users pk=bulk-58 data=value-58
-[FLUSHED] table=users pk=bulk-57 data=value-57
-[FLUSHED] table=users pk=bulk-56 data=value-56
-[FLUSHED] table=users pk=bulk-55 data=value-55
-[FLUSHED] table=users pk=bulk-54 data=value-54
-[FLUSHED] table=users pk=bulk-53 data=value-53
-[FLUSHED] table=users pk=bulk-52 data=value-52
-[FLUSHED] table=users pk=bulk-51 data=value-51
-[FLUSHED] table=users pk=bulk-50 data=value-50
-[FLUSHED] table=users pk=bulk-49 data=value-49
-[FLUSHED] table=users pk=bulk-48 data=value-48
-[FLUSHED] table=users pk=bulk-47 data=value-47
-[FLUSHED] table=users pk=bulk-46 data=value-46
-[FLUSHED] table=users pk=bulk-45 data=value-45
-[FLUSHED] table=users pk=bulk-44 data=value-44
-[FLUSHED] table=users pk=bulk-43 data=value-43
-[FLUSHED] table=users pk=bulk-42 data=value-42
-[FLUSHED] table=users pk=bulk-41 data=value-41
-[FLUSHED] table=users pk=bulk-40 data=value-40
-[FLUSHED] table=users pk=bulk-39 data=value-39
-[FLUSHED] table=users pk=bulk-38 data=value-38
-[FLUSHED] table=users pk=bulk-37 data=value-37
-[FLUSHED] table=users pk=bulk-36 data=value-36
-[FLUSHED] table=users pk=bulk-35 data=value-35
-[FLUSHED] table=users pk=bulk-34 data=value-34
-[FLUSHED] table=users pk=bulk-33 data=value-33
-[FLUSHED] table=users pk=bulk-32 data=value-32
-[FLUSHED] table=users pk=bulk-31 data=value-31
-[FLUSHED] table=users pk=bulk-30 data=value-30
-[FLUSHED] table=users pk=bulk-29 data=value-29
-[FLUSHED] table=users pk=bulk-28 data=value-28
-[FLUSHED] table=users pk=bulk-27 data=value-27
-[FLUSHED] table=users pk=bulk-26 data=value-26
-[FLUSHED] table=users pk=bulk-25 data=value-25
-[FLUSHED] table=users pk=bulk-24 data=value-24
-[FLUSHED] table=users pk=bulk-23 data=value-23
-[FLUSHED] table=users pk=bulk-22 data=value-22
-[FLUSHED] table=users pk=bulk-21 data=value-21
-[FLUSHED] table=users pk=bulk-20 data=value-20
-[FLUSHED] table=users pk=bulk-19 data=value-19
-[FLUSHED] table=users pk=bulk-18 data=value-18
-[FLUSHED] table=users pk=bulk-17 data=value-17
-[FLUSHED] table=users pk=bulk-16 data=value-16
-[FLUSHED] table=users pk=bulk-99 data=value-99
-[FLUSHED] table=users pk=bulk-87 data=value-87
-[FLUSHED] table=users pk=bulk-88 data=value-88
-[FLUSHED] table=users pk=bulk-90 data=value-90
-[FLUSHED] table=users pk=bulk-91 data=value-91
-[FLUSHED] table=users pk=bulk-94 data=value-94
-[FLUSHED] table=users pk=bulk-95 data=value-95
-[FLUSHED] table=users pk=bulk-97 data=value-97
-[FLUSHED] table=users pk=bulk-98 data=value-98
-[FLUSHED] table=users pk=bulk-86 data=value-86
-[FLUSHED] table=users pk=bulk-89 data=value-89
-[FLUSHED] table=users pk=bulk-93 data=value-93
-[FLUSHED] table=users pk=bulk-96 data=value-96
-[FLUSHED] table=users pk=bulk-85 data=value-85
-[FLUSHED] table=users pk=bulk-92 data=value-92
-]]></system-out>
-  </testcase>
-  <testcase name="testSetNearTTLBoundary" classname="cachedb.CacheDBIntegrationTest" time="4.932">
-    <system-out><![CDATA[[FLUSHED] table=users pk=3 data=Carol-v2
-]]></system-out>
-  </testcase>
-  <testcase name="testMultipleTables" classname="cachedb.CacheDBIntegrationTest" time="3.008">
-    <system-out><![CDATA[[FLUSHED] table=users pk=6 data=Frank
-[FLUSHED] table=orders pk=100 data=Order-100
-]]></system-out>
-  </testcase>
-  <testcase name="testBasicLifecycle" classname="cachedb.CacheDBIntegrationTest" time="4.018">
-    <system-out><![CDATA[[FLUSHED] table=users pk=1 data=Alice-v2
-]]></system-out>
-  </testcase>
-  <testcase name="testIdempotentExpiration" classname="cachedb.CacheDBIntegrationTest" time="4.027">
-    <system-out><![CDATA[[FLUSHED] table=users pk=2 data=Bob-v2
-]]></system-out>
-  </testcase>
-  <testcase name="testReinsertAfterExpiration" classname="cachedb.CacheDBIntegrationTest" time="6.019">
-    <system-out><![CDATA[[FLUSHED] table=users pk=8 data=Henry
-[FLUSHED] table=users pk=8 data=Henry-v2
-]]></system-out>
-  </testcase>
+  <testcase name="deleteNonExistentEntry" classname="cachedb.CacheDBDeleteTest" time="0.014"/>
 </testsuite>

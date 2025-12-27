@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: cachedb.CacheDBLifecycleTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.028 s -- in cachedb.CacheDBLifecycleTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.024 s -- in cachedb.CacheDBLifecycleTest

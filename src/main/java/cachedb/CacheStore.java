@@ -48,6 +48,21 @@ public class CacheStore {
         return entry.columns;
     }
 
+    public boolean delete(String table, Map<String, Object> pk) {
+        Map<String, CacheEntry> tableMap = store.get(table);
+        if (tableMap == null) return false;
+
+        String keyHash = hash(pk);
+        CacheEntry entry = tableMap.get(keyHash);
+        if (entry == null) return false;
+
+        // Mark as deleted but keep entry for flushing
+        entry.columns = null;
+        entry.dirty = true;
+        entry.version++;
+        return true;
+    }
+
     public Map<String, Map<String, CacheEntry>> raw() {
         return store;
     }

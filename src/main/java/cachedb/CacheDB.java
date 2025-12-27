@@ -38,25 +38,25 @@ public final class CacheDB {
     }
 
 
-
     private void recover() throws IOException {
         if (!Files.exists(WAL_PATH)) return;
 
         WALReader reader = new WALReader(WAL_PATH);
 
         for (LogRecord r : reader) {
-            if (r.type() != LogType.PUT) continue;
-
             String key = new String(r.key());
-            String value = new String(r.value());
-
             // key format: table|{pk}
             String[] parts = key.split("\\|", 2);
             String table = parts[0];
             Map<String, Object> pk = SimpleCodec.parseMap(parts[1]);
-            Map<String, Object> cols = SimpleCodec.parseMap(value);
 
-            store.upsert(table, pk, cols);
+            if (r.type() == LogType.PUT) {
+                String value = new String(r.value());
+                Map<String, Object> cols = SimpleCodec.parseMap(value);
+                store.upsert(table, pk, cols);
+            } else if (r.type() == LogType.DELETE) {
+                store.delete(table, pk);
+            }
         }
     }
 
@@ -85,6 +85,24 @@ public final class CacheDB {
     public Map<String, Object> get(String table,
                                    Map<String, Object> primaryKey) {
         return store.get(table, primaryKey);
+    }
+
+    public void delete(String table,
+                      Map<String, Object> primaryKey) {
+
+        Objects.requireNonNull(table);
+        Objects.requireNonNull(primaryKey);
+
+        byte[] walKey =
+                (table + "|" + primaryKey.toString()).getBytes();
+
+        try {
+            wal.append(LogRecord.delete(walKey));
+        } catch (IOException e) {
+            throw new RuntimeException("WAL write failed", e);
+        }
+
+        store.delete(table, primaryKey);
     }
 
     /* ------------ BUILDER ------------ */

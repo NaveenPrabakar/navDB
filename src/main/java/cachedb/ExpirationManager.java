@@ -1,5 +1,7 @@
 package cachedb;
 
+import java.util.Map;
+
 public class ExpirationManager implements Runnable {
 
     private final CacheStore store;
@@ -21,13 +23,15 @@ public class ExpirationManager implements Runnable {
                     CacheEntry entry = e.getValue();
                     if (entry.expiresAt <= now) {
                         if (entry.dirty) {
+                            boolean isDelete = entry.columns == null;
                             flushManager.enqueue(
                                     new FlushTask(
                                             new RowMutation(
                                                     table,
                                                     entry.primaryKey,
-                                                    entry.columns,
-                                                    entry.version
+                                                    entry.columns != null ? entry.columns : Map.of(),
+                                                    entry.version,
+                                                    isDelete
                                             )
                                     )
                             );

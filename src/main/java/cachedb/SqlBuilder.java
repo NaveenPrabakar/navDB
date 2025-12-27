@@ -27,4 +27,13 @@ public class SqlBuilder {
                 " (" + colList + ") VALUES (" + placeholders + ")" +
                 " ON DUPLICATE KEY UPDATE " + updates;
     }
+
+    public static String buildDelete(RowMutation m, TableSchema schema) {
+        String whereClause = schema.primaryKeys.stream()
+                .map(pk -> pk + " = ?")
+                .reduce((a, b) -> a + " AND " + b)
+                .orElse("");
+
+        return "DELETE FROM " + m.table + " WHERE " + whereClause;
+    }
 }

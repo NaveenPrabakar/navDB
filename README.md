@@ -54,18 +54,18 @@ CacheDB provides an in-memory cache with automatic write-behind persistence to a
 
 ### Write-Behind Persistence
 
-Writes are immediately cached in memory and asynchronously flushed to the database when entries expire. This provides:
+Writes and deletes are immediately cached in memory and asynchronously flushed to the database when entries expire. This provides:
 
-- **Low latency**: Reads and writes are served from memory
-- **High throughput**: Batches writes to the database
-- **Durability**: All writes are logged to WAL before being cached
+- **Low latency**: Reads, writes, and deletes are served from memory
+- **High throughput**: Batches writes and deletes to the database
+- **Durability**: All operations are logged to WAL before being cached
 
 ### Write-Ahead Logging (WAL)
 
-Every write operation is logged to a persistent WAL file (`logs/wal.log`) before being cached:
+Every write and delete operation is logged to a persistent WAL file (`logs/wal.log`) before being cached:
 
-- **Crash recovery**: On startup, CacheDB replays all unflushed writes from WAL
-- **Durability**: Writes survive application crashes
+- **Crash recovery**: On startup, CacheDB replays all unflushed operations from WAL
+- **Durability**: Writes and deletes survive application crashes
 - **Checkpointing**: After successful database flushes, the WAL is truncated
 
 ### Automatic Schema Detection
@@ -124,6 +124,17 @@ Map<String, Object> user = cache.get(
 // Returns: {name=Alice, email=alice@test.com}
 ```
 
+### Deleting Data
+
+```java
+// Delete data from cache
+cache.delete(
+    "users",
+    Map.of("id", 1)
+);
+// Entry is marked for deletion and will be removed from database on flush
+```
+
 ### Multiple Tables
 
 ```java
@@ -170,6 +181,13 @@ cache.checkpoint();
 3. Data is cached in memory with expiration timestamp
 4. Application continues without waiting for database
 
+### Delete Flow
+
+1. Application calls `cache.delete(table, primaryKey)`
+2. Delete is immediately appended to WAL (durable)
+3. Entry is marked as deleted in cache (columns set to null)
+4. Application continues without waiting for database
+
 ### Read Flow
 
 1. Application calls `cache.get(table, primaryKey)`
@@ -180,14 +198,16 @@ cache.checkpoint();
 
 1. ExpirationManager periodically checks cache entries
 2. When TTL expires, entry is marked for flushing
-3. FlushManager asynchronously writes to database using UPSERT
+3. FlushManager asynchronously:
+   - For updates: writes to database using UPSERT
+   - For deletes: executes DELETE statement
 4. After successful flush, WAL is checkpointed (truncated)
 
 ### Recovery Flow
 
 1. On startup, CacheDB checks for existing WAL file
-2. WALReader replays all PUT operations from WAL
-3. Recovered entries are loaded back into cache
+2. WALReader replays all PUT and DELETE operations from WAL
+3. Recovered entries are loaded back into cache (PUT) or marked as deleted (DELETE)
 4. Normal operation resumes
 
 ## Requirements
@@ -250,8 +270,8 @@ The write-ahead log is stored at: `logs/wal.log`
 
 ## Error Handling
 
-- **Database failures**: Writes remain in WAL and cache, will be retried on next flush
-- **WAL write failures**: Throws `RuntimeException` (write cannot proceed without durability)
+- **Database failures**: Writes and deletes remain in WAL and cache, will be retried on next flush
+- **WAL write failures**: Throws `RuntimeException` (operations cannot proceed without durability)
 - **Schema errors**: Throws `RuntimeException` if table has no primary key
 - **Recovery errors**: Corrupted WAL entries are skipped (safe recovery)
 
@@ -322,6 +342,19 @@ cache.set("users", Map.of("id", 1), Map.of("name", "Alice"));
 CacheDB cache2 = CacheDB.builder()...
     .build();
 // All unflushed writes are restored to cache
+```
+
+### Scenario 4: Delete Operations
+
+```java
+// Write data
+cache.set("users", Map.of("id", 1), Map.of("name", "Alice"));
+
+// Delete data
+cache.delete("users", Map.of("id", 1));
+
+// Entry is marked as deleted in cache
+// Will be removed from database when TTL expires and flush occurs
 ```
 
 ## Testing

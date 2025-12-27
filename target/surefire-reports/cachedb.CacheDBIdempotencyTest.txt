@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: cachedb.CacheDBIdempotencyTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.024 s -- in cachedb.CacheDBIdempotencyTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.027 s -- in cachedb.CacheDBIdempotencyTest

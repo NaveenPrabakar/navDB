@@ -36,36 +36,59 @@ public class FlushManager implements Runnable {
     private void flush(FlushTask task) throws Exception {
         RowMutation m = task.mutation;
         TableSchema schema = schemaRegistry.get(m.table);
-        String sql = SqlBuilder.buildUpsert(m, schema);
 
-        try (Connection c = dataSource.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+        try (Connection c = dataSource.getConnection()) {
+            if (m.isDelete) {
+                String sql = SqlBuilder.buildDelete(m, schema);
+                try (PreparedStatement ps = c.prepareStatement(sql)) {
+                    int idx = 1;
+                    for (String pk : schema.primaryKeys) {
+                        Object value = m.primaryKey.get(pk);
+                        if (value == null && schema.primaryKeys.size() == 1 && m.primaryKey.size() == 1) {
+                            value = m.primaryKey.values().iterator().next();
+                        }
+                        ps.setObject(idx++, value);
+                    }
 
-            int idx = 1;
-            for (String pk : schema.primaryKeys) {
-                Object value = m.primaryKey.get(pk);
-                if (value == null) {
-                    value = m.columns.get(pk);
+                    try {
+                        ps.executeUpdate();
+                        checkpoint();
+                    } catch (Exception e) {
+                        // DB down → WAL preserved
+                    }
+
+                    System.out.println("[FLUSHED DELETE] " + m.table + " " + m.primaryKey);
                 }
-                if (value == null && schema.primaryKeys.size() == 1 && m.primaryKey.size() == 1) {
-                    value = m.primaryKey.values().iterator().next();
-                }
-                ps.setObject(idx++, value);
-            }
-            for (String col : m.columns.keySet()) {
-                if (!schema.primaryKeys.contains(col)) {
-                    ps.setObject(idx++, m.columns.get(col));
-                }
-            }
+            } else {
+                String sql = SqlBuilder.buildUpsert(m, schema);
+                try (PreparedStatement ps = c.prepareStatement(sql)) {
+                    int idx = 1;
+                    for (String pk : schema.primaryKeys) {
+                        Object value = m.primaryKey.get(pk);
+                        if (value == null) {
+                            value = m.columns.get(pk);
+                        }
+                        if (value == null && schema.primaryKeys.size() == 1 && m.primaryKey.size() == 1) {
+                            value = m.primaryKey.values().iterator().next();
+                        }
+                        ps.setObject(idx++, value);
+                    }
+                    for (String col : m.columns.keySet()) {
+                        if (!schema.primaryKeys.contains(col)) {
+                            ps.setObject(idx++, m.columns.get(col));
+                        }
+                    }
 
-            try {
-                ps.executeUpdate();
-                checkpoint();
-            } catch (Exception e) {
-                // DB down → WAL preserved
-            }
+                    try {
+                        ps.executeUpdate();
+                        checkpoint();
+                    } catch (Exception e) {
+                        // DB down → WAL preserved
+                    }
 
-            System.out.println("[FLUSHED] " + m.table + " " + m.primaryKey);
+                    System.out.println("[FLUSHED] " + m.table + " " + m.primaryKey);
+                }
+            }
         }
     }
 
