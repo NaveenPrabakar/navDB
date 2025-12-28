@@ -1,0 +1,53 @@
+@options
+@packages
+-classpath
+'C:/Users/nvnpr/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar;C:/Users/nvnpr/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/nvnpr/OneDrive/Documents/Computer Science/Personal Projects/navDB/src/main/java;C:/Users/nvnpr/OneDrive/Documents/Computer Science/Personal Projects/navDB/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/nvnpr/OneDrive/Documents/Computer Science/Personal Projects/navDB/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'CacheDB 0.1.0 API'
+-use
+-version
+-windowtitle
+'CacheDB 0.1.0 API'
+cachedb.benchmark
+cachedb
+C:\Users\nvnpr\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar = 1727047165115
+C:\Users\nvnpr\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar = 1766523249962
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\src\main\java = 1766642472045
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\generated-sources\annotations = 1766873110721
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\allclasses-index.html = 1766873149450
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\allpackages-index.html = 1766873149453
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\constant-values.html = 1766873149295
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\copy.svg = 1766873149510
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\element-list = 1766873149251
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\help-doc.html = 1766873149502
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\index-all.html = 1766873149486
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\index.html = 1766873149429
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\link.svg = 1766873149512
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\member-search-index.js = 1766873149460
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\module-search-index.js = 1766873149455
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\overview-summary.html = 1766873149495
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\overview-tree.html = 1766873149423
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\package-search-index.js = 1766873149456
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\script.js = 1766873149508
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\search-page.js = 1766873149518
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\search.html = 1766873149491
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\search.js = 1766873149515
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\stylesheet.css = 1766873149506
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\tag-search-index.js = 1766873149461
+C:\Users\nvnpr\OneDrive\Documents\Computer Science\Personal Projects\navDB\target\apidocs\type-search-index.js = 1766873149458

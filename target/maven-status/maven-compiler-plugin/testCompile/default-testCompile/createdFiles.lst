@@ -1,0 +1,10 @@
+cachedb\CacheDBIdempotencyTest.class
+cachedb\CacheDBMultiTableTest.class
+cachedb\CacheDBRecoveryTest.class
+cachedb\CacheDBBurstTest.class
+cachedb\CacheDBDeleteTest.class
+cachedb\CacheDBLifecycleTest.class
+cachedb\CacheDBTestBase.class
+cachedb\CacheDBCheckpointTest.class
+cachedb\CacheDBReinsertTest.class
+cachedb\CacheDBCompositeKeyTest.class
